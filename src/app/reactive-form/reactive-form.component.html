@@ -1,0 +1,44 @@
+<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+    {{reactiveForm.value | json}}
+    <div>
+        <input type="text" id="name" formControlName="name">
+        <div *ngIf="f.name.invalid && f.name.errors.required && 
+        (f.name.dirty || f.name.touched || submitted)"> Please enter name</div>
+    </div>
+    <div>
+        <input type="email" id="email" formControlName="email">
+        <div *ngIf="f.email.invalid && f.email.errors.required && 
+        (f.email.dirty || f.email.touched || submitted)"> Please enter email</div>
+    </div>
+    <div formArrayName="items" *ngFor="let item of reactiveForm.get('items')['controls']; let i = index;">
+        <div [formGroupName]="i">
+            <input type="text" formControlName="itemName" placeholder="Item name">
+            <input type="number" formControlName="quantity" placeholder="Item quantity">
+            <input type="number" min="1" formControlName="price" placeholder="Item price">
+            <input type="number" min="1" formControlName="discount" placeholder="Discount">
+            <span>
+            discount : {{(item.controls['price'].value * item.controls['quantity'].value) * item.controls['discount'].value / 100}}
+            </span>
+            <span>
+            item price : {{(item.controls['price'].value * item.controls['quantity'].value) - ((item.controls['price'].value * item.controls['quantity'].value) * item.controls['discount'].value / 100)}}
+            </span>
+            <div *ngIf="item.controls['quantity'].invalid && item.controls['quantity'].errors.required && 
+             (item.controls['quantity'].dirty || item.controls['quantity'].touched || submitted)"> Please enter quantity</div>
+            <div *ngIf="item.controls['quantity'].invalid && item.controls['quantity'].errors.min">
+                Please enter quantity more than 0
+            </div>
+            <button type="button" (click)="addItem()">Add Item</button>
+            <button type="button" *ngIf="items?.length && i" (click)="removeItem(i)">Remove Item</button>
+        </div>
+    </div>
+    <div>
+        <span> total quantity : {{quantitySum}}</span><br>
+        <span> total price : {{priceSum}}</span><br>
+        <span> total discount in rupess : {{discountPrice}}</span><br>
+        <span> total discount in percentage : {{discountPercentage}}</span><br>
+        <span> total sum : {{totalsum.toFixed(2)}}</span>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>

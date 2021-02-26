@@ -1,0 +1,42 @@
+<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+    <div>{{reactiveForm.value | json}}</div>
+    <div>
+        <input type="text" formControlName="name" placeholder="Name">
+        <div *ngIf="f.name.invalid && f.name.errors.required && (f.name.dirty || f.name.touched || submitted)">
+            Please Enter name
+        </div>
+    </div>
+    <div>
+        <input type="email" formControlName="email" placeholder="Email">
+        <div *ngIf="f.email.invalid && (f.email.touched || f.email.dirty || submitted)">
+            <span *ngIf="f.email.errors.required">Please enter email address</span>
+            <span *ngIf="f.email.errors.pattern">Please ente email proper format</span>
+        </div>
+    </div>
+    <div>
+        <span style="margin-right: 90px;">Item name</span>
+        <span style="margin-right: 100px;">Quantity</span>
+        <span style="margin-right: 150px;">Price</span>
+        <span style="margin-right: 90px;">Discount</span>
+        <span style="margin-right: 90px;">CGST(5%)</span>
+    </div>
+    <div formArrayName="items" *ngFor="let item of reactiveForm.get('items')['controls'];let i=index;">
+        <div [formGroupName]="i">
+            <input type="text" formControlName="itemName" placeholder="Item name">
+            <input type="number" min="0" formControlName="quantity" placeholder="Quantity">
+            <input type="number" min="0" formControlName="price" placeholder="Price">
+            <input type="number" min="0" formControlName="discount" placeholder="Discount">
+            <input type="number" min="0" [value]="(((item.controls['quantity'].value * item.controls['price'].value) * 5)/100)" disabled>
+            <span>
+                Discount price: {{(((item.controls['quantity'].value * item.controls['price'].value) * item.controls['discount'].value)/100)}}
+            </span>
+            <button type="button" (click)="addItem()">Add Item</button>
+            <button type="button" (click)="removeItem(i)" *ngIf="i">Remove Item</button>
+        </div>
+    </div>
+    <div>{{priceObj | json}}</div>
+    <div>
+        <button type="submit">Submit</button>
+        <button type="cancel">Cancel</button>
+    </div>
+</form>

@@ -1,0 +1,61 @@
+.left { float:left; width:47%;}
+.main { float:left; width:6%;margin: 0px 0px 15px;}
+.right { float:left; width:47%;}
+.reviewform {padding: 30px 80px;float: left;width: 100%;box-sizing: border-box;}
+.review-section-form-main{ width:100%;float:left;height: -webkit-fill-available;}
+.review-section-form-section {background-color: white;width: 100%;position: relative;float: left;}
+p{font-weight: 600;font-style: italic;font-family: sans-serif;font-size:12px;}
+.label {display:inline-block;position: static;padding-top: 20px;padding-bottom: 15px; width:100%;font-size: 12px;font-style: italic;color: rgba(55,59,77);}
+.input-box-align-name { display:inline-block; width:45%;padding-top: 10px; }
+.input-box-align-email { display:inline-block; width:45%;padding-top: 10px;margin-left: 45px; }
+input[type=text],input[type=email] {
+    width: 100%;
+    padding: 12px 12px;
+    box-sizing: border-box;
+    font-style: italic;
+}
+button[type=submit]{float: right; background-color: orange;color: white;padding: 8px; width: 20%;border: none;cursor: pointer;}
+button[type=submit]:hover,button[type=submit]:focus{
+    background-color: rgb(0, 109, 143);
+}
+.btn-submit{ padding-top: 15px; padding-bottom: 15px; float:right; width:100%;}
+textarea{width: 100%;resize: none;height: 200px;padding:0px; margin: 0px;font-style: italic;}
+.input-box-align-message{padding-top:10px}
+.is-invalid{border:1px solid red !important;background-color: rgba(231, 111, 95, 0.753) !important;}
+button:disabled { opacity: 0.5;}
+.reviewform  input:hover, .reviewform  textarea:hover,
+.reviewform  input:focus, .reviewform  textarea:focus {
+      background-color:white;
+      border:1px solid black;
+} 
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+} 
+/*Styles for small screens*/
+  @media  only screen and (max-width: 768px) {
+      .review-section-form-section{
+          width: 100%;
+          padding:0px;
+      }
+      .btn-submit {
+        padding-top: 15px;
+        padding-bottom: 25px;
+      }
+      .reviewform{padding:15px;}
+  }
+  
+  

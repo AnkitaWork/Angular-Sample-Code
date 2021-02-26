@@ -1,0 +1,27 @@
+<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
+    {{reactiveForm.value | json}}
+    <div>Name:<input type="text" formControlName="name"></div>
+    <div *ngIf="f.name.invalid && f.name.errors.required && (f.name.dirty || f.name.touched || submitted)">
+        Please Enter name
+    </div>
+    <div>Email:<input type="email" formControlName="email"></div>
+    <div *ngIf="f.email.invalid && f.email.errors.required && (f.email.dirty || f.email.touched || submitted)">
+        Please Enter email
+    </div>
+    <div formArrayName="items" *ngFor="let item of reactiveForm.get('items')['controls'];let i=index;">
+        <div [formGroupName]="i">
+            <input type="text" formControlName="itemName" placeholder="Item Name">
+            <input type="number" min="0" formControlName="quantity" placeholder="Quantity">
+            <input type="number" min="0" formControlName="price" placeholder="Price">
+            <input type="number" min="0" formControlName="discount" placeholder="Discount">
+            <input type="number" min="0" placeholder="SGST" [value]="((item.controls['quantity'].value * item.controls['price'].value) * item.controls['discount'].value)/100">
+            <button type="button" (click)="addItem()">Add Item</button>
+            <button type="button" (click)="removeItem(i)" *ngIf="i">Remove Item</button>
+        </div>
+    </div>
+    <div>{{totalPriceCal | json}}</div>
+    <div>
+        <button type="submit">Submit</button>
+        <button type="Cancel">Cancel</button>
+    </div>
+</form>

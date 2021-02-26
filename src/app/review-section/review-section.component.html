@@ -1,0 +1,34 @@
+<div class="review-section-form-main">
+    <div class="review-section-form-section">
+        <form class="reviewform" name="review-form" #form="ngForm" novalidate (ngSubmit)="addReview()">
+            <div *ngIf="message" class="alert alert-success">Thank you for providing your valuable review!</div>
+            <div *ngIf="message === false" class="alert alert-danger">Something is wrong please try again later.</div>
+            <p>*indicates a required field</p>
+            <div class="left">
+                <div class="label">Name *</div>
+                <input type="text" name="name" [(ngModel)]="reviewObj.name" #name="ngModel" pattern="^\w+( \w+)*$"
+                    [ngClass]="{ 'is-invalid': name.errors && (name.dirty || name.touched || form.submitted) }" required
+                    [attr.title]="name.errors && (name.dirty || name.touched || form.submitted) ? 'Please fill in this field.': '' " />
+            </div>
+            <div class="main">
+                <p></p>
+            </div>
+            <div class="right">
+                <div class="label">Email *</div>
+                <input type="email" name="email" [(ngModel)]="reviewObj.email" #email="ngModel"
+                    pattern="^[A-Za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    [ngClass]="{ 'is-invalid': email.errors && (email.dirty || email.touched || form.submitted) }"
+                    required
+                    [attr.title]="email.errors && (email.dirty || email.touched || form.submitted) ? 'Please fill in this field.': '' " />
+            </div>
+            <div class="label">Message *</div>
+            <textarea rows="5" name="review" #review="ngModel" [(ngModel)]="reviewObj.review"
+                [ngClass]="{ 'is-invalid': review.errors && (review.dirty || review.touched || form.submitted) }"
+                required
+                [attr.title]="review.errors && (review.dirty || review.touched || form.submitted) ? 'Please fill in this field.': '' "></textarea>
+            <div class="btn-submit">
+                <button name="submit" type="submit" [disabled]="form.invalid">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

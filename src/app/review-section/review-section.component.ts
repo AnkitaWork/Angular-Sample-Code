@@ -13,7 +13,7 @@ export class ReviewSectionComponent implements OnInit {
   private apiURL = "https://salesapi.advanced-taxsolutions.com/reviews/createCrmActivityForReview";
   public reviewObj = { name: '', email: '', review: '' };
   public message: any;
-
+  
   constructor(private http: HttpClient,private commonApiCallingService:CommonApiCallingService) { }
 
   public addReview() {
@@ -22,7 +22,6 @@ export class ReviewSectionComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
 }
